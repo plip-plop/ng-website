@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import { Menu } from './components/menu/menu';
 import { Product } from './components/product-card/product';
 import { ProductCard } from './components/product-card/product-card';
@@ -10,11 +10,10 @@ import { ProductCard } from './components/product-card/product-card';
   styleUrl: './app.css',
 })
 export class App {
-  protected title = 'zenika-ng-website';
   // myVar: string = null; // Si la règle "strict" du fichier "tsconfig.json" est à FALSE, ça passe !
-  total = 0;
+  total = signal<number>(0);
 
-  products: Product[] = [
+  products: WritableSignal<Product[]> = signal<Product[]>([
     {
       id: 'welsch',
       title: 'HelloWorld',
@@ -47,14 +46,27 @@ export class App {
       price: 19,
       stock: 2,
     },
-  ];
+  ]);
 
   addToBasket(produit: Product) {
-    produit.stock -= 1;
-    this.total += produit.price;
+    this.products.update((products) =>
+      products.map((product) => {
+        if (product.id === produit.id) {
+          return { ...product, stock: product.stock - 1 };
+        }
+        return product;
+      })
+    );
+
+    this.total.update((totalActuel) => totalActuel + produit.price);
   }
 
-  get hasProductsInStock(): boolean {
-    return this.products.some(({ stock }) => stock > 0);
-  }
+  // hasProductsInStock = computed<boolean>(() => {
+  // console.log("Hello");
+  //   return this.products().some(({ stock }) => stock > 0);
+  // });
+
+  hasProductsInStock = computed<boolean>(() =>
+    this.products().some(({ stock }) => stock > 0)
+  );
 }

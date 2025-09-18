@@ -56,3 +56,14 @@ WARNING: En shadow, la notion de "directive" est toujours **essentielle** dans A
 C'est un library CSS : elle ajoute des classes CSS utilisables directement dans le code HTML (ex: "text-bg-warning"), sans avoir à coder nous-mêmes des règles CSS.
 Elle nécessite d'installer Bootstrap ("npm i bootstrap") et d'ajouter une configuration supplémentaire dans "angular.json" (voir TP 3), afin de guider le compilateur pour qu'il fasse appel à Bootstrap.
 https://getbootstrap.com/docs/4.0/utilities/colors/
+
+```
+  greetings() {
+    console.log(this.sayHello()); // Affiche l'output de la fonction "sayHello()" (donc 'Hello')
+    console.log(this.sayHello); // Affiche la signature de la fonction "sayHello()"
+  }
+
+  sayHello() {
+    return 'Hello';
+  }
+```
