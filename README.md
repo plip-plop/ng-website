@@ -41,12 +41,18 @@ WARNING: En shadow, la notion de "directive" est toujours **essentielle** dans A
 ## Unit tests
 
 - "fixture.componentInstance()" : Récupération de la classe TS du composant testé.
-- "fixture.nativeElement()" : Récupération de l'HTL du composant testé.
+- "fixture.nativeElement()" : Récupération de l'HTML du composant testé.
 
-**IMPORTANT:** Angular génère automatiquement 1 TU ('should create'). Si ce TU plante, c'est que vous avez mal configuré votre TU (il est alors nécessaire de vérifier le code "TestBec.configureTestingModule()").
+**IMPORTANT:** Angular génère automatiquement 1 TU ('should create'). Si ce TU plante, c'est que vous avez mal configuré votre TU (il est alors nécessaire de vérifier le code "TestBed.configureTestingModule()").
 
 ```
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 ```
+
+## Bootstrap
+
+C'est un library CSS : elle ajoute des classes CSS utilisables directement dans le code HTML (ex: "text-bg-warning"), sans avoir à coder nous-mêmes des règles CSS.
+Elle nécessite d'installer Bootstrap ("npm i bootstrap") et d'ajouter une configuration supplémentaire dans "angular.json" (voir TP 3), afin de guider le compilateur pour qu'il fasse appel à Bootstrap.
+https://getbootstrap.com/docs/4.0/utilities/colors/

@@ -1,6 +1,6 @@
 <div
   class="card h-100 text-center"
-  [class.text-bg-info]="product().stock === 1"
+  [class.text-bg-warning]="product().stock === 1"
 >
   <img class="card-img-top" src="{{ product().photo}}" alt="Product image" />
   <div class="card-header">

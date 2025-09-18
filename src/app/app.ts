@@ -12,9 +12,9 @@ import { ProductCard } from './components/product-card/product-card';
 export class App {
   protected title = 'zenika-ng-website';
   // myVar: string = null; // Si la règle "strict" du fichier "tsconfig.json" est à FALSE, ça passe !
-  protected total = 0;
+  total = 0;
 
-  protected products: Product[] = [
+  products: Product[] = [
     {
       id: 'welsch',
       title: 'HelloWorld',
@@ -49,7 +49,7 @@ export class App {
     },
   ];
 
-  protected addToBasket(produit: Product) {
+  addToBasket(produit: Product) {
     produit.stock -= 1;
     this.total += produit.price;
   }
