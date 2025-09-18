@@ -12,7 +12,6 @@ export class ProductCard {
   addToBasket = output<Product>();
 
   ajouterAuPanier() {
-    console.log('Click');
     this.addToBasket.emit(this.product());
   }
 }

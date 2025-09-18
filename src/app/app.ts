@@ -49,7 +49,12 @@ export class App {
     },
   ];
 
-  protected calculerTotal(produit: Product) {
+  protected addToBasket(produit: Product) {
+    produit.stock -= 1;
     this.total += produit.price;
+  }
+
+  get hasProductsInStock(): boolean {
+    return this.products.some(({ stock }) => stock > 0);
   }
 }
