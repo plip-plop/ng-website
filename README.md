@@ -2,14 +2,14 @@
 
 ## JS: Valeurs Truthy/falsy
 
-Comment une valeur (string, number, etc.) peut être interprétée comme un prédicat (= qui renvoie true/false) en JS ?
+Comment une valeur (string, number, etc.) peut être interprétée comme un **prédicat** (= expression qui renvoie true/false) en JS ?
 
 https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 https://developer.mozilla.org/en-US/docs/Glossary/Falsy
 
 ## JS: Méthodes de tableaux !
 
-".some()", ".find()", etc.
+Principales méthodes à retenir : ".map()", ".some()", ".find()", ".every()".
 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 ## Migrer une application vers une version plus récente
@@ -57,6 +57,10 @@ C'est un library CSS : elle ajoute des classes CSS utilisables directement dans 
 Elle nécessite d'installer Bootstrap ("npm i bootstrap") et d'ajouter une configuration supplémentaire dans "angular.json" (voir TP 3), afin de guider le compilateur pour qu'il fasse appel à Bootstrap.
 https://getbootstrap.com/docs/4.0/utilities/colors/
 
+## JS: Bizarreries
+
+Exemple : Appel à une fonction **avec ou sans parenthèses** derrière le nom de la fonction.
+
 ```
   greetings() {
     console.log(this.sayHello()); // Affiche l'output de la fonction "sayHello()" (donc 'Hello')
@@ -66,4 +70,23 @@ https://getbootstrap.com/docs/4.0/utilities/colors/
   sayHello() {
     return 'Hello';
   }
+```
+
+## Fonctions fléchées : Point important
+
+Si une **fonction fléchée ne contient qu'une seule instruction**, le mot-clé "return" est implicite. De plus l'implémentation n'a pas besoin d'être encadrée par des accolades.
+
+```
+  hasProductsInStock = computed<boolean>(() =>
+    this.products().some(({ stock }) => stock > 0)
+  );
+```
+
+Si une **fonction fléchée contient plusieurs instructions**, le mot-clé "return" DOIT être explicite. De plus l'implémentation DOIT être encadrée par des accolades.
+
+```
+  hasProductsInStock = computed<boolean>(() => {
+    console.log('Hello');
+    return this.products().some(({ stock }) => stock > 0);
+  });
 ```

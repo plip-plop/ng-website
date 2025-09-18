@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { BasketService } from '../../services/basket-service';
 
 @Component({
   selector: 'app-menu',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './menu.css'
 })
 export class Menu {
-
+  private _basketService = inject(BasketService);
+  
+  numberOfItems = computed<number>(() => this._basketService.items().length);
 }
