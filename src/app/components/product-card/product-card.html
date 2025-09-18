@@ -1,9 +1,8 @@
-<div class="card h-100 text-center">
-  <img
-    class="card-img-top"
-    src="{{ product().photo}}"
-    alt="Product image"
-  />
+<div
+  class="card h-100 text-center"
+  [class.text-bg-info]="product().stock === 1"
+>
+  <img class="card-img-top" src="{{ product().photo}}" alt="Product image" />
   <div class="card-header">
     <small>{{ product().description}}</small>
   </div>
@@ -12,6 +11,8 @@
       <a class="card-link">{{ product().title}}</a>
     </h3>
     <p class="card-text">{{ product().price}} €</p>
-    <button class="btn btn-primary" (click)="ajouterAuPanier()">Ajoutez au panier</button>
+    <button class="btn btn-primary" (click)="ajouterAuPanier()">
+      Ajoutez au panier
+    </button>
   </div>
 </div>
