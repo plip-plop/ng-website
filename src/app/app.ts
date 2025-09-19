@@ -5,10 +5,11 @@ import { ProductCard } from './components/product-card/product-card';
 import { CatalogService } from './services/catalog-service';
 import { BasketService } from './services/basket-service';
 import { BasketItem } from './services/basket-item';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCard, Menu],
+  imports: [ProductCard, Menu, CurrencyPipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
