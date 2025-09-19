@@ -1,6 +1,6 @@
+import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { Product } from './product';
-import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 // import { NgClass } from '@angular/common';
 
 @Component({
