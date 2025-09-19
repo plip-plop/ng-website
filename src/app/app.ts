@@ -1,11 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { Menu } from './components/menu/menu';
 import { Product } from './components/product-card/product';
 import { ProductCard } from './components/product-card/product-card';
-import { CatalogService } from './services/catalog-service';
 import { BasketService } from './services/basket-service';
-import { BasketItem } from './services/basket-item';
-import { CurrencyPipe } from '@angular/common';
+import { CatalogService } from './services/catalog-service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,7 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
+export class App implements OnInit {
   private _catalogService = inject(CatalogService);
   private _basketService = inject(BasketService);
 
@@ -22,15 +21,15 @@ export class App {
   products = this._catalogService.products;
   hasProductsInStock = this._catalogService.hasProductsInStock;
 
+  ngOnInit() {
+    this._catalogService.fetchProducts().subscribe();
+    this._basketService.fetchBasket().subscribe();
+  }
+
   addToBasket(produit: Product) {
-    this._catalogService.decreaseStock(produit.id);
-
-    const itemAjoute: BasketItem = {
-      id: produit.id,
-      title: produit.title,
-      price: produit.price,
-    };
-
-    this._basketService.addItem(itemAjoute);
+    this._basketService.addItem(produit.id).subscribe({
+      next: () => this._catalogService.decreaseStock(produit.id),
+      error: (err) => console.log('Ca plante : ', err),
+    });
   }
 }

@@ -1,44 +1,15 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Product } from '../components/product-card/product';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CatalogService {
-  private _products = signal<Product[]>([
-    {
-      id: 'welsch',
-      title: 'HelloWorld',
-      description: 'Tee-shirt col rond - Homme',
-      photo: '/assets/coding-the-welsch.jpg',
-      price: 20,
-      stock: 2,
-    },
-    {
-      id: 'world',
-      title: 'Coding the world',
-      description: 'Tee-shirt col rond - Homme',
-      photo: '/assets/coding-the-world.jpg',
-      price: 18,
-      stock: 1,
-    },
-    {
-      id: 'vador',
-      title: 'Duck Vador',
-      description: 'Tee-shirt col rond - Femme',
-      photo: '/assets/coding-the-stars.jpg',
-      price: 21,
-      stock: 2,
-    },
-    {
-      id: 'snow',
-      title: 'Coding the snow',
-      description: 'Tee-shirt col rond - Femme',
-      photo: '/assets/coding-the-snow.jpg',
-      price: 19,
-      stock: 2,
-    },
-  ]);
+  httpClient = inject(HttpClient);
+
+  private _products = signal<Product[]>([]);
 
   public products = this._products.asReadonly();
 
@@ -55,5 +26,11 @@ export class CatalogService {
         return product;
       })
     );
+  }
+
+  fetchProducts(): Observable<Product[]> {
+    return this.httpClient
+      .get<Product[]>('http://localhost:8080/api/products')
+      .pipe(tap((products) => this._products.set(products)));
   }
 }
