@@ -153,4 +153,4 @@ Les **high-order operators** vont nous permettre de :
 
 ## Avoir plusieurs versions de NodeJS sur son poste
 
-Il faut utiliser un outil supplémentaire : je conseille "nvm" ("node version manager").
+Il faut utiliser un outil supplémentaire : "nvm" ("node version manager").
