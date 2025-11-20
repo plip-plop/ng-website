@@ -8,9 +8,8 @@ describe('ProductCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductCard]
-    })
-    .compileComponents();
+      imports: [ProductCard],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProductCard);
     component = fixture.componentInstance;
@@ -20,4 +19,14 @@ describe('ProductCard', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display the product photo as image url', () => {});
+
+  it('should display the product description', () => {});
+
+  it('should display the product title', () => {});
+
+  it('should display the product price', () => {});
+
+  it('should emit addToBasket event with the given product when the button is clicked', () => {});
 });
