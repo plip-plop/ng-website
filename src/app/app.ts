@@ -49,5 +49,10 @@ export class App {
 
   ajouterAuPanier(product: Product) {
     this.total.update((valeurActuelle) => valeurActuelle + product.price);
+    product.stock -= 1;
+  }
+
+  get hasProductsInStock(): boolean {
+    return this.products.some((product) => product.stock > 0);
   }
 }

@@ -11,21 +11,13 @@
   <h2 class="h4">Catalogue</h2>
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    @if(hasProductsInStock) { @for(product of products; track product.id) { @if(product.stock > 0) {
     <div class="col">
-      <app-product-card [product]="products[0]" (addToBasket)="ajouterAuPanier($event)"/>
+      <app-product-card [product]="product" (addToBasket)="ajouterAuPanier($event)" />
     </div>
-
-    <div class="col">
-      <app-product-card [product]="products[1]" />
-    </div>
-
-    <div class="col">
-      <app-product-card [product]="products[2]" />
-    </div>
-
-    <div class="col">
-      <app-product-card [product]="products[3]" />
-    </div>
+    } } } @else {
+    <p>Désolé, stock vide !</p>
+    }
   </div>
 </main>
 <!-- End of Extract to "src/app/app.html" -->
